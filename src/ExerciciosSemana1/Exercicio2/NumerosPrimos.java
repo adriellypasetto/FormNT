@@ -1,4 +1,4 @@
-package Exercicio2;
+package ExerciciosSemana1.Exercicio2;
 
 public class NumerosPrimos {
 

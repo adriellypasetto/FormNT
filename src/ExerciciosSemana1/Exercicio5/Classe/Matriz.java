@@ -1,4 +1,4 @@
-package Exercicio5.Classe;
+package ExerciciosSemana1.Exercicio5.Classe;
 
 public class Matriz {
 

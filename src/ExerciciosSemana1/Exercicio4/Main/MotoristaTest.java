@@ -1,6 +1,6 @@
-package Exercicio4.Main;
+package ExerciciosSemana1.Exercicio4.Main;
 
-import Exercicio4.Classes.Motorista;
+import ExerciciosSemana1.Exercicio4.Classes.Motorista;
 
 public class MotoristaTest {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package Exercicio6;
+package ExerciciosSemana1.Exercicio6;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

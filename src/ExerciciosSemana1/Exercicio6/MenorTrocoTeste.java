@@ -1,4 +1,4 @@
-package Exercicio6;
+package ExerciciosSemana1.Exercicio6;
 
 
 public class MenorTrocoTeste {

@@ -1,7 +1,7 @@
-package Exercicio5.Main;
+package ExerciciosSemana1.Exercicio5.Main;
 
 
-import Exercicio5.Classe.Matriz;
+import ExerciciosSemana1.Exercicio5.Classe.Matriz;
 
 public class MatrizTest {
     public static void main(String[] args) {
