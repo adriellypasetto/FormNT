@@ -5,10 +5,6 @@ import ExerciciosSemana3.Exercicio1.Classes.Cadastros.CadastroUsuario;
 import java.util.Scanner;
 
 public class Login {
-    public static String user ;
-    public static String senha ;
-
-
 
     public static  void telaLogin() {
         Scanner sc = new Scanner(System.in);
@@ -17,32 +13,10 @@ public class Login {
         String user = sc.nextLine();
         System.out.println("Senha: ");
         String senha = sc.nextLine();
-        CadastroUsuario.verificandoCredenciais();
+        CadastroUsuario.verificarCredenciais(user, senha);
 
     };
-
-
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-
-
-
-    }
+}
 
 
 

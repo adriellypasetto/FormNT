@@ -1,15 +1,20 @@
 package ExerciciosSemana3.Exercicio1.Classes.Cadastros;
 
 import ExerciciosSemana3.Exercicio1.Classes.Login;
+import ExerciciosSemana3.Exercicio1.Classes.MenuCliente;
+import ExerciciosSemana3.Exercicio1.Classes.MenuFuncionario;
 import ExerciciosSemana3.Exercicio1.Classes.Usuario;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 
 public class CadastroUsuario {
     private static List<Usuario> usuarios = new ArrayList<>();
     private static String usuario;
+
 
     public static List<Usuario> getUsuarios() {
         return usuarios;
@@ -32,7 +37,7 @@ public class CadastroUsuario {
         if (role == 1) {
             sc.nextLine();
             System.out.println("Selecionado Cliente");
-            ;
+
         } else if (role == 2) {
             sc.nextLine();
 
@@ -41,14 +46,17 @@ public class CadastroUsuario {
             System.out.println("Opção invalida, comece novamente");
         }
         System.out.println("INFORME O NOME DE USUARIO");
-         usuario = sc.nextLine();
+        usuario = sc.nextLine();
         System.out.println("DIGITE UMA SENHA");
         String senha = sc.nextLine();
 
+        String senhaBase64 = Base64.getEncoder().encodeToString(senha.getBytes(StandardCharsets.UTF_8));
+
         usuarioCadastrado.setIdade(idade);
         usuarioCadastrado.setNome(nome);
-        usuarioCadastrado.setRole(String.valueOf(role));
+        usuarioCadastrado.setRole(role);
         usuarioCadastrado.setUser(usuario);
+        usuarioCadastrado.setPassword(senhaBase64);
 
         usuarios.add(usuarioCadastrado);
         Login.telaLogin();
@@ -56,24 +64,33 @@ public class CadastroUsuario {
     }
 
 
-    public static void verificandoCredenciais() {
-        String valorUser = Login.user;
-        boolean encontrado = false;
+    public static void verificarCredenciais(String user, String senha) {
+        boolean usuarioAutenticado = false;
 
         for (Usuario usuario : usuarios) {
-            if (usuario.getUser().equals(valorUser)) {
-                encontrado = true;
-                break;
+
+            if (usuario.getUser().equals(user)) {
+                byte[] byteSenha = Base64.getDecoder().decode(usuario.getPassword());
+                String senhaDescriptografada = new String(byteSenha);
+
+                if (senha.equals(senhaDescriptografada)) {
+                    usuarioAutenticado = true;
+                    System.out.println("LOGIN AUTORIZADO...");
+                    if (usuario.getRole() == 1) {
+                        MenuCliente.acessoCliente();
+                    } else {
+                        MenuFuncionario.acessoFuncionario();
+                    }
+                } else {
+                    System.out.println("Senha incorreta");
+                }
+            }else {
+                System.out.println("USUARIO NÃO ENCONTRADO");
             }
         }
+   }
+}
 
-        if (encontrado) {
-            System.out.println("Usuário encontrado.");
-        } else {
-            System.out.println("Usuário não encontrado.");
-        }
-    }
-    }
 
 
 

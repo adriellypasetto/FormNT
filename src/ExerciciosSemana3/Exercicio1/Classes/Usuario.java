@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Usuario {
     private String nome;
-    private String role;
+    private int role;
     private int idade;
     private String user;
     private String password;
@@ -30,7 +30,7 @@ public class Usuario {
         return Objects.equals(user, other.user);
     }
 
-    public Usuario(String nome, String role, int idade, String user, String password) {
+    public Usuario(String nome, int role, int idade, String user, String password) {
         this.nome = nome;
         this.role = role;
         this.idade = idade;
@@ -46,11 +46,11 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 

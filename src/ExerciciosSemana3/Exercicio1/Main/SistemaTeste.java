@@ -6,7 +6,7 @@ import ExerciciosSemana3.Exercicio1.Classes.MenuInicial;
 
 public class SistemaTeste {
     public static void main(String[] args) {
-        MenuFuncionario.acessoFuncionario();
+        MenuInicial.menuInicial();
 
 
 
