@@ -70,7 +70,7 @@ public class CadastroFilme {
             for (Usuario usuario : usuarios) {
                 if (usuario.getIdade() >= filme.getClassificacao())
                     System.out.println(filme);
-                MenuFuncionario.acessoFuncionario();
+
 
             }
         }

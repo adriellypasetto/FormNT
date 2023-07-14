@@ -2,13 +2,13 @@ package ExerciciosSemana3.Exercicio1.Classes;
 
 import ExerciciosSemana3.Exercicio1.Classes.Cadastros.CadastroFilme;
 
-import java.sql.SQLOutput;
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuCliente {
 
 
-    public static void acessoCliente() {
+    public static List<Ingressos> acessoCliente() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("");
@@ -23,16 +23,17 @@ public class MenuCliente {
         int opcao = sc.nextInt();
 
         if (opcao == 1) {
-            Ingressos.vendaIngresso();
+            VendaIngresso.venderIngresso();
         } else if (opcao == 2) {
             CadastroFilme.listarFilmes();
 
         } else if (opcao == 3) {
-            Ingressos.vendaIngresso();
+            System.out.println("INSERIR METODO VISUALIZAR INGRESSO");
         } else {
             MenuInicial.menuInicial();
         }
 
 
+        return null;
     }
 }

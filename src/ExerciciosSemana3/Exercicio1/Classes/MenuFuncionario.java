@@ -24,7 +24,7 @@ public class MenuFuncionario {
             CadastroFilme.cadastroFilmes();
         } else if (opcao == 2) {
             CadastroFilme.listarFilmes();
-
+            MenuFuncionario.acessoFuncionario();
         } else if (opcao == 3) {
             ExcluirFilme.excluirFilme();
         } else {

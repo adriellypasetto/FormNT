@@ -2,8 +2,11 @@ package ExerciciosSemana3.Exercicio1.Classes;
 
 import ExerciciosSemana3.Exercicio1.Classes.Cadastros.CadastroFilme;
 
+import javax.crypto.spec.PSource;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
+import static ExerciciosSemana3.Exercicio1.Classes.Cadastros.CadastroFilme.cadastroFilmes;
 import static ExerciciosSemana3.Exercicio1.Classes.Cadastros.CadastroFilme.filmes;
 
 public class ExcluirFilme {
@@ -22,6 +25,8 @@ public class ExcluirFilme {
         for (Filme filme : filmes) {
             if (filme.getId() == excluirId) {
                 filmeNaLista = true;
+                System.out.println("FILME EXCLUIDO COM SUCESSO");
+                MenuFuncionario.acessoFuncionario();
 
                 if (filme.getPoltronas() < 100) {
                     System.out.println("Não é possível excluir o filme. Ingressos já foram vendidos.");
