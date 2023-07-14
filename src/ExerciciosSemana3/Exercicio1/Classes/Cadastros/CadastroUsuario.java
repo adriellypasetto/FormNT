@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CadastroUsuario {
-    private static List<Usuario> usuarios = new ArrayList<>();
-    private static String usuario;
+    public static List<Usuario> usuarios = new ArrayList<>();
+    static String usuario;
 
 
     public static List<Usuario> getUsuarios() {

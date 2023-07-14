@@ -98,7 +98,7 @@ public class Filme {
         return poltronas;
     }
 
-    public void setPoltronas(int poltronas) {
+    public void setPoltronas() {
         this.poltronas = poltronas;
     }
 }

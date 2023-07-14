@@ -23,7 +23,7 @@ public class MenuCliente {
         int opcao = sc.nextInt();
 
         if (opcao == 1) {
-            System.out.println("METODO COMPRA DE INGRESSO");
+            Ingressos.vendaIngresso();
         } else if (opcao == 2) {
             CadastroFilme.listarFilmes();
 

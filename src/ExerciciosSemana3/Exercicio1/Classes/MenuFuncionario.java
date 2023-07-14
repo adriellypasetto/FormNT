@@ -26,7 +26,7 @@ public class MenuFuncionario {
             CadastroFilme.listarFilmes();
 
         } else if (opcao == 3) {
-            System.out.println("INCLUIR AQUI O METODO EXCLUIR FILMES");
+            ExcluirFilme.excluirFilme();
         } else {
             MenuInicial.menuInicial();
         }
