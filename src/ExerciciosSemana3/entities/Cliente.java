@@ -4,65 +4,95 @@ import ExerciciosSemana3.enums.Role;
 
 import ExerciciosSemana3.services.MenuService;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import static ExerciciosSemana3.entities.Filme.filmesEmCartaz;
+
 
 public class Cliente extends Usuario {
 
-    public static List<Filme> ingressosComprados = new ArrayList<>();
+   // public static List<Ingresso> ingressosComprados = new ArrayList<>();
 
     public Cliente(String nome, Role role, int idade, String user, String password) {
         super(nome, role, idade, user, password);
     }
 
-    public static void comprarIngresso(){
-        for(Filme filme : filmesEmCartaz){
-            for(Usuario usuario : usuarios){
-                if (usuario.getIdade() >= filme.getIdadeMinima() && filme.getPoltronasDisponiveis() > 0){
-                    System.out.println(filme);
 
-                    System.out.println("FAVOR INFORMAR QUAL O FILME ESCOLHIDO (ID)");
+    public static void comprarIngresso(Usuario usuario) {
 
-                    Scanner sc = new Scanner(System.in);
+        System.out.println("=== FILMES EM CARTAZ ===");
+        for (Filme filme : Filme.filmesEmCartaz) {
+            System.out.println(filme.getId() + " - " + filme.getTitulo());
+        }
 
-                    Long opcaoFilme = sc.nextLong();
+        System.out.println("FAVOR INFORMAR QUAL O FILME ESCOLHIDO (ID)");
 
-                    if (opcaoFilme == filme.getId()) {
-                        System.out.print("Digite a quantidade de ingressos que deseja comprar: ");
-                        int quantidadeIngressos = sc.nextInt();
-                        sc.nextLine();
+        Scanner sc = new Scanner(System.in);
 
-                        if (quantidadeIngressos > filme.getPoltronasDisponiveis()) {
-                            System.out.println("Não há poltronas suficientes disponíveis.");
-                            MenuService.menuCliente(usuario);
+        long opcaoFilme = sc.nextLong();
+        sc.nextLine();
 
-                        } else {
-                            System.out.println("Você deseja confirmar a compra? [1] SIM / [2] NAO");
-                            int confirmaCompra = sc.nextInt();
+        Filme filmeEscolhido = Filme.buscarFilmePorId(opcaoFilme);
 
-                            if (confirmaCompra == 1){
-                                System.out.println("Compra realizada com sucesso!");
+        if (filmeEscolhido != null && filmeEscolhido.getPoltronasDisponiveis() > 0) {
+            if (usuario.getIdade() >= filmeEscolhido.getIdadeMinima()) {
+                System.out.print("Digite a quantidade de ingressos que deseja comprar: ");
+                int quantidadeIngressos = sc.nextInt();
+                sc.nextLine();
 
-                                Filme ingressoComprado = Filme.buscarFilmePorId(opcaoFilme);
-                                Ingresso ingresso = new Ingresso(ingressoComprado, usuario);
+                if (quantidadeIngressos > filmeEscolhido.getPoltronasDisponiveis()) {
+                    System.out.println("Não há poltronas suficientes disponíveis.");
+                } else {
+                    System.out.println("Você deseja confirmar a compra do filme: " + filmeEscolhido.getTitulo() + "? [1] SIM / [2] NÃO");
+                    int confirmaCompra = sc.nextInt();
 
-                                ingressosComprados.add(ingressoComprado);
+                    if (confirmaCompra == 1) {
+                        System.out.println("Compra realizada com sucesso!");
+                        Ingresso ingressoCompradoAgora = new Ingresso(filmeEscolhido, usuario);
+                        Usuario.ingressosComprados.add(ingressoCompradoAgora);
 
-                            } else {
-                                System.out.println("Compra cancelada! Retornando ao menu!");
-                                MenuService.menuCliente(usuario);
+                        int ingressosAnteriores = 0;
+                        for (Ingresso ingressoComprado : ingressosComprados) {
+                            if (ingressoComprado.equals(filmeEscolhido)) {
+                                ingressosAnteriores++;
                             }
                         }
+
+                        int totalIngressosComprados = ingressosAnteriores + quantidadeIngressos;
+
+                        System.out.println("Você comprou " + totalIngressosComprados + " ingresso(s) para o filme " + filmeEscolhido.getTitulo());
+
+                        for (int i = 0; i < quantidadeIngressos; i++) {
+                            Ingresso ingresso = new Ingresso(filmeEscolhido, usuario);
+                        }
+
+                        MenuService.menuCliente(usuario);
+                        return;
+                    } else {
+                        System.out.println("Compra cancelada! Retornando ao menu!");
                     }
                 }
+            } else {
+                System.out.println("Você não atende à classificação de idade mínima para este filme.");
             }
+        } else {
+            System.out.println("Filme não encontrado ou não há poltronas disponíveis.");
         }
+
+        MenuService.menuCliente(usuario);
     }
 
-    public static void mostrarIngressosComprados(){
-        System.out.println(ingressosComprados);
+    public static void mostrarIngressosComprados(Usuario usuario) {
+        if (Usuario.ingressosComprados.isEmpty()) {
+            System.out.println("Nenhum ingresso comprado.");
+        } else {
+            System.out.println("Ingressos comprados (" + Usuario.ingressosComprados.size() + "):");
+            for (int i = 0; i < Usuario.ingressosComprados.size(); i++) {
+                Ingresso ingresso = Usuario.ingressosComprados.get(i);
+                System.out.println("Ingresso " + (i + 1) + ":");
+                System.out.println("Filme: " + ingresso.getFilme().getTitulo());
+            }
+        }
+        MenuService.menuCliente(usuario);
     }
 }
+

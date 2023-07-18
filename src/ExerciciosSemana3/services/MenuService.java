@@ -2,6 +2,7 @@ package ExerciciosSemana3.services;
 
 import ExerciciosSemana3.entities.Cliente;
 import ExerciciosSemana3.entities.Filme;
+import ExerciciosSemana3.entities.Funcionario;
 import ExerciciosSemana3.entities.Usuario;
 
 import java.util.Scanner;
@@ -66,7 +67,7 @@ public class MenuService {
                 MenuService.menuFuncionario();
                 break;
             case 3:
-                // CRIAR LOGICA PARA EXCLUIR FILME;
+                FilmeService.excluirFilmesSemIngresso();
                 break;
             case 4:
                 MenuService.menuInicial();
@@ -93,21 +94,21 @@ public class MenuService {
 
         switch (opcaoEscolhida){
             case 1:
-                Cliente.comprarIngresso();
+                Cliente.comprarIngresso(usuario);
                 break;
             case 2:
                 System.out.println(Filme.filmesEmCartaz);
                 MenuService.menuCliente(usuario);
                 break;
             case 3:
-                Cliente.mostrarIngressosComprados();
+                Cliente.mostrarIngressosComprados(usuario);
                 break;
             case 4:
                 MenuService.menuInicial();
                 break;
             default:
                 System.out.println("Opção inválida!!!");
-                MenuService.menuFuncionario();
+                MenuService.menuCliente(usuario);
         }
 
 

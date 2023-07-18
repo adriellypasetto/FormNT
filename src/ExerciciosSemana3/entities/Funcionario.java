@@ -7,18 +7,4 @@ public class Funcionario extends Usuario {
     public Funcionario(String nome, Role role, int idade, String user, String password) {
         super(nome, role, idade, user, password);
     }
-
-
-    public void cadastrarFilme(){
-
-    }
-
-    public void excluirFilme(){ //retorna List<Filme>
-
-
-    }
-
-
-
-
 }

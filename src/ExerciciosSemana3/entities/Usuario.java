@@ -15,6 +15,7 @@ public abstract class Usuario {
     private String password;
 
     public static List<Usuario> usuarios = new ArrayList<>();
+    public static List<Ingresso> ingressosComprados = new ArrayList<>();
 
     public Usuario(String nome, Role role, int idade, String user, String password) {
         this.nome = nome;

@@ -7,6 +7,7 @@ import ExerciciosSemana3.enums.Role;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import static ExerciciosSemana3.entities.Usuario.usuarios;
@@ -57,7 +58,11 @@ public class UsuarioService {
 
     public static void logar(String user, String password) {
 
-        for (Usuario usuario : usuarios) {
+        Iterator<Usuario> iterator = usuarios.iterator();
+
+        while (iterator.hasNext()) {
+            Usuario usuario = iterator.next();
+
             if (usuario.getUser().equals(user)) {
                 byte[] bytePassword = Base64.getDecoder().decode(usuario.getPassword());
                 String senhaDescriptografada = new String(bytePassword);
@@ -69,14 +74,15 @@ public class UsuarioService {
                     } else {
                         MenuService.menuCliente(usuario);
                     }
-
+                    return;
                 } else {
                     System.out.println("Senha inválida!!!");
+                    MenuService.menuInicial();
                 }
-            } else {
-                System.out.println("Usuário inválido!!!");
             }
         }
+        System.out.println("Usuário inválido!!!");
+        MenuService.menuInicial();
     }
 }
 
