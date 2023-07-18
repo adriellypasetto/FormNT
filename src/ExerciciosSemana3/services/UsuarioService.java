@@ -6,6 +6,7 @@ import ExerciciosSemana3.entities.Usuario;
 import ExerciciosSemana3.enums.Role;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLOutput;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -33,8 +34,17 @@ public class UsuarioService {
         }
 
         System.out.println("Digite a idade do usuario: ");
-        int idade = sc.nextInt();
-        sc.nextLine();
+        int idade = 0;
+        try {
+            int idadeDigitada = sc.nextInt();
+            sc.nextLine();
+            idade = idadeDigitada;
+        } catch (Exception e) {
+            System.out.println("** O valor precisa ser uma idade válida!** ");
+            System.out.println("");
+            MenuService.menuInicial();
+        }
+
 
         System.out.println("Digite o seu user name para Login: ");
         String user = sc.nextLine();
