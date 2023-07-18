@@ -3,6 +3,7 @@ package ExerciciosSemana3.services;
 import ExerciciosSemana3.entities.Cliente;
 import ExerciciosSemana3.entities.Filme;
 import ExerciciosSemana3.entities.Ingresso;
+import ExerciciosSemana3.entities.Usuario;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class FilmeService {
         MenuService.menuFuncionario();
     }
 
+
     public static void excluirFilmesSemIngresso() {
 
         System.out.println("=== EXCLUSÃO DE FILMES SEM INGRESSOS ===");
@@ -48,7 +50,6 @@ public class FilmeService {
         System.out.println("Informe o ID do filme que deseja excluir:");
 
         Scanner sc = new Scanner(System.in);
-
         long idFilmeExcluir = sc.nextLong();
         sc.nextLine();
 
@@ -56,10 +57,18 @@ public class FilmeService {
 
         if (filmeExcluir != null) {
             boolean ingressosComprados = false;
-            for (Ingresso ingressoComprado : Cliente.ingressosComprados) {
-                if (filmeExcluir.equals(ingressoComprado)) {
-                    ingressosComprados = true;
-                    break;
+            for (Usuario usuario : Usuario.usuarios) {
+                if (usuario instanceof Cliente) {
+                    Cliente cliente = (Cliente) usuario;
+                    for (Ingresso ingresso : Usuario.ingressosComprados) {
+                        if (ingresso.getFilme().equals(filmeExcluir)) {
+                            ingressosComprados = true;
+                            break;
+                        }
+                    }
+                    if (ingressosComprados) {
+                        break;
+                    }
                 }
             }
 
